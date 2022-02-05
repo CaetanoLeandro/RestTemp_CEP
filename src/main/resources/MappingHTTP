@@ -1,0 +1,74 @@
+$$$$$$$$$$$$$$$$$$$$$ CLIENTETENTITY $$$$$$$$$$$$$$$$$
+  @Id
+    private String id;
+ $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+
+
+################ CONTROLER HTTP ###################
+
+ private final RepositoryEntity repositoryEntity;
+
+@PostMapping
+    @ResponseStatus(CREATED)
+    public ClientEntity save(@RequestBody @Valid ClientEntity clientEntity) {
+        return service.save(clientEntity);
+    }
+
+    @PutMapping("/{id}")
+    @ResponseStatus(ACCEPTED)
+    public ClientEntity update(@RequestBody @Valid ClientEntity clientEntity, @PathVariable String id) {
+        return service.update(clientEntity, id);
+    }
+
+    @GetMapping("/{id}")
+    @ResponseStatus(OK)
+    public ClientEntity findById(@PathVariable @Valid String id) {
+        return service.findById(id);
+    }
+
+    @DeleteMapping("/")
+    @ResponseStatus(NO_CONTENT)
+    public void delete(@RequestParam(required = false) List<String> id) {
+        service.delete(id);
+    }
+
+    @GetMapping("/findAll")
+    @ResponseStatus(OK)
+    public List<ClientEntity> findAll() {
+        return service.findAll();
+    }
+    ##########################################################################
+
+    %%%%%%%%%%%%%%%%%%%%%% SERVICE %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+    @PostMapping
+        @ResponseStatus(CREATED)
+        public ClientEntity save(@RequestBody @Valid ClientEntity clientEntity) {
+            return service.save(clientEntity);
+        }
+
+        @PutMapping("/{id}")
+        @ResponseStatus(ACCEPTED)
+        public ClientEntity update(@RequestBody @Valid ClientEntity clientEntity, @PathVariable String id) {
+            return service.update(clientEntity, id);
+        }
+
+        @GetMapping("/{id}")
+        @ResponseStatus(OK)
+        public ClientEntity findById(@PathVariable @Valid String id) {
+            return service.findById(id);
+        }
+
+        @DeleteMapping("/")
+        @ResponseStatus(NO_CONTENT)
+        public void delete(@RequestParam(required = false) List<String> id) {
+            service.delete(id);
+        }
+
+        @GetMapping("/findAll")
+        @ResponseStatus(OK)
+        public List<ClientEntity> findAll() {
+            return service.findAll();
+        }
+        }
+        %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

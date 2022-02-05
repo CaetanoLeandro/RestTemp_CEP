@@ -10,13 +10,13 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Builder
 @Data
-public class Cep {
-
+public class CepEntity {
 
    private String cep;
    private String logradouro;
    private String bairro;
    private String complemento;
    private String uf;
-   private String cidade;
+   private String ddd;
+   private String localidade;
 }
