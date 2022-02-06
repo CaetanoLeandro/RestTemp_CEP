@@ -15,17 +15,17 @@ import java.time.LocalDate;
 @Document(collection = "transporte")
 public class CepEntity {
 
-    @Id
-    private String id;
-    private String nome;
+      @Id
+      private String id;
+      private String nome;
 //    @JsonProperty("cep")
       private String cep;
       private Double vlTotalFrete;
       private Double pesoEncomenda;
       private String dataPrevistaEntrega;
       private LocalDate dataConsulta;
-      private CepEntity cepOrigem;
-      private CepEntity ceDestino;
+      private String cepOrigem;
+      private String ceDestino;
       private String logradouro;
       private String bairro;
       private String complemento;
