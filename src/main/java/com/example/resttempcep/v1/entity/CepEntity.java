@@ -17,7 +17,7 @@ public class CepEntity {
 
       @Id
       private String id;
-      private String nome;
+      private String nomeDestinatario;
 //    @JsonProperty("cep")
       private String cep;
       private Double vlTotalFrete;

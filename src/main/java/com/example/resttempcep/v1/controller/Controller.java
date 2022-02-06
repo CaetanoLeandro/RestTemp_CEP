@@ -48,9 +48,9 @@ public class Controller {
     public List<CepEntity> findAll() {
         return service.findAll();
     }
+
     @GetMapping("/cep/{cep}")
     public ApiExtEntity findCep(@PathVariable @Valid String cep){
         return service.getCep(cep);
-
     }
 }

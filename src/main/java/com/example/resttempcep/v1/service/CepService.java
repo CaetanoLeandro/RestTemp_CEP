@@ -16,8 +16,9 @@ import java.util.List;
 @Service
 public class CepService {
 
-    private final ConsumerApi consumerApi;
     private final RepositoryEntity repository;
+    private final ConsumerApi consumerApi;
+
 
     public CepEntity save(CepEntity cepEntity) {
         return repository.save(cepEntity);
@@ -52,6 +53,15 @@ public class CepService {
     public ApiExtEntity getCep(String cep){
         return consumerApi.findCep(cep);
     }
+
+    public CepEntity getDescontoFrete(){
+        return new CepEntity();
+    }
+
+    public CepEntity getPrazoDeEntrega(){
+        return new CepEntity();
+    }
+
 }
 
 

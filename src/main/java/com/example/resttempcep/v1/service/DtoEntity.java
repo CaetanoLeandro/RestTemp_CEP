@@ -17,5 +17,4 @@ public class DtoEntity {
                     .localidade(apiExtEntity.getLocalidade())
                     .build();
         }
-
 }
