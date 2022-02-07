@@ -2,7 +2,7 @@ package com.example.resttempcep.v1.service;
 
 import com.example.resttempcep.v1.entity.CepEntity;
 
-public class PrecoEPrazo extends CepEntity {
+public class PriceNDeadline extends CepEntity {//TODO -> Regras de negocios
 
     Double valorPeso = 1.00;
 
@@ -15,7 +15,7 @@ public class PrecoEPrazo extends CepEntity {
         setDataPrevistaEntrega("1");
         setVlTotalFrete((getPesoEncomenda()*valorPeso)/2);
 
-    }else if(cepsMesmoUf && getCepOrigem().getDdd().equals(getCeDestino().getDdd()) {
+    }else if(cepsMesmoUf && getCepOrigem().getDdd().equals(getCeDestino().getDdd())) {
         setDataPrevistaEntrega("3");
         double SetECinco = 75/100;
         setVlTotalFrete(getPesoEncomenda()*valorPeso-(SetECinco*valorPeso));
