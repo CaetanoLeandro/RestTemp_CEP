@@ -54,14 +54,6 @@ public class CepService {
         return consumerApi.findCep(cep);
     }
 
-    public CepEntity getDescontoFrete(){
-        return new CepEntity();
-    }
-
-    public CepEntity getPrazoDeEntrega(){
-        return new CepEntity();
-    }
-
 }
 
 

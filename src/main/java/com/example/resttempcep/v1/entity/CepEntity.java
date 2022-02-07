@@ -24,8 +24,8 @@ public class CepEntity {
       private Double pesoEncomenda;
       private String dataPrevistaEntrega;
       private LocalDate dataConsulta;
-      private String cepOrigem;
-      private String ceDestino;
+      private ApiExtEntity cepOrigem;
+      private ApiExtEntity ceDestino;
       private String logradouro;
       private String bairro;
       private String complemento;
