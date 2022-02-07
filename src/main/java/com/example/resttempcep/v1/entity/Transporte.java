@@ -17,7 +17,6 @@ public class Transporte {
       private Double valorTotalFrete;
       private Date dataPrevistaEntrega;
       private LocalDate dataConsulta;
-
       private String logradouro;
       private String bairro;
       private String complemento;

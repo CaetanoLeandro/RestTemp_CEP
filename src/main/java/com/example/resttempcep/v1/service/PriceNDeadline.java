@@ -1,11 +1,14 @@
 package com.example.resttempcep.v1.service;
 
-import com.example.resttempcep.v1.entity.Transporte;
+import com.example.resttempcep.v1.entity.Destinatario;
+
+
 
 import java.time.LocalDate;
+import java.util.Calendar;
 import java.util.Date;
 
-public class PriceNDeadline extends Transporte { //TODO -> Regras de negocios
+public class PriceNDeadline extends Destinatario { //TODO -> Regras de negocios
 
     private Double valorTotalFrete;
     private Date dataPrevistaEntrega;
@@ -16,12 +19,12 @@ public class PriceNDeadline extends Transporte { //TODO -> Regras de negocios
     Date dataPrevisaoEntrega;
 
     String cepOrigem =  String.valueOf(getCepOrigem());
-    String cepDestino = String.valueOf(getCeDestino());
+    String cepDestino = String.valueOf(getCepDestino());
 
      Boolean cepsMesmoUf = Boolean.valueOf(String.valueOf(cepDestino.substring(0, 1)
              .equals(cepOrigem.substring(0, 1))));
 
-     Boolean mesmoDDD = getCepOrigem()
+     Boolean mesmoDDD =
              .getDdd()
              .equals(getCeDestino().getDdd());
 

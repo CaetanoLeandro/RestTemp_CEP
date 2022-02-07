@@ -1,19 +1,18 @@
 package com.example.resttempcep.v1.controller.mapper.request;
 
-
 import com.example.resttempcep.v1.controller.model.request.DestinatarioControllerRequest;
-import com.example.resttempcep.v1.entity.Destinatario;
-import com.example.resttempcep.v1.service.model.response.DestinatarioServiceResponse;
+import com.example.resttempcep.v1.service.model.request.DestinatarioServiceRequest;
+
 
 public class DestinatarioControllerRequestMapper {
 
-    public static Destinatario toEntityDestinatario (DestinatarioControllerRequest destinatarioControllerRequest) {
-        return DestinatarioServiceResponse.builder()
-                .id(destinatarioControllerRequest.getId())
-                .nomeDestinatario(destinatarioControllerRequest.getNomeDestinatario())
-                .pesoEncomenda(destinatarioControllerRequest.getPesoEncomenda())
-                .cepOrigem(destinatarioControllerRequest.getCepOrigem())
-                .cepDestino(destinatarioControllerRequest.getCepDestino())
+    public static DestinatarioServiceRequest toServiceRequest(DestinatarioControllerRequest destinatarioServiceRequest) {
+        return DestinatarioServiceRequest.builder()
+                .id(destinatarioServiceRequest.getId())
+                .nomeDestinatario(destinatarioServiceRequest.getNomeDestinatario())
+                .pesoEncomenda(destinatarioServiceRequest.getPesoEncomenda())
+                .cepOrigem(destinatarioServiceRequest.getCepOrigem())
+                .cepDestino(destinatarioServiceRequest.getCepDestino())
                 .build();
     }
 

@@ -7,8 +7,6 @@ import com.example.resttempcep.v1.service.model.response.DestinatarioServiceResp
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;
 import java.util.List;
-
-
 import static com.example.resttempcep.v1.service.mapper.request.DestinatarioServiceRequestMapper.toEntityDestinatario;
 import static com.example.resttempcep.v1.service.mapper.response.DestinatarioServiceResponseMapper.toDestinatarioServiceResponse;
 
@@ -41,8 +39,8 @@ public class DestinatarioFacade {
                 .toList();
     }
 
-    public void delete(List<String> id) {
-        service.delete(id);
-    }
+//    public void delete(List<String> id) {
+//        service.delete(id);
+//    }
 
 }

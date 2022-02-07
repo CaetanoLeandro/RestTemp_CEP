@@ -5,7 +5,6 @@ import com.example.resttempcep.v1.exceptions.notfound.NotFoundException;
 import com.example.resttempcep.v1.repository.DestinatarioRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
-import org.springframework.util.CollectionUtils;
 import java.util.List;
 
 @AllArgsConstructor
@@ -19,9 +18,7 @@ public class DestinatarioService {
     }
 
     public Destinatario update(Destinatario destinatario, String id) {
-        Destinatario destinatarioId = repository.findById(id)
-                .orElseThrow(() -> new NotFoundException("ID not found"));
-        destinatario.setId(destinatarioId.getId());
+        destinatario.setId(id);
         return repository.save(destinatario);
     }
 
@@ -34,14 +31,14 @@ public class DestinatarioService {
         return repository.findAll();
     }
 
-    public void delete(List<String> id) {
-        if(!CollectionUtils.isEmpty(id)) {
-            var del = repository.findAll();
-            repository.delete((Destinatario) del);
-        }
-        else{
-            repository.delete((Destinatario) repository.findAll());
-        }
-    }
+//    public void delete(List<String> id) {
+//        if(!CollectionUtils.isEmpty(id)) {
+//            var del = repository.findAll();
+//            repository.delete((Destinatario) del);
+//        }
+//        else{
+//            repository.delete((Destinatario) repository.findAll());
+//        }
+//    }
 
 }
