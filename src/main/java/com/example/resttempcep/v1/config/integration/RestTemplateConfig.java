@@ -1,4 +1,4 @@
-package com.example.resttempcep.v1.restTemplate.config;
+package com.example.resttempcep.v1.config.integration;
 
 import lombok.AllArgsConstructor;
 import org.springframework.context.annotation.Bean;

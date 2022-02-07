@@ -1,9 +1,9 @@
-package com.example.resttempcep.v1.controller;
+package com.example.resttempcep.v1.controller.transporte;
 
 
-import com.example.resttempcep.v1.entity.ApiExtEntity;
-import com.example.resttempcep.v1.entity.CepEntity;
-import com.example.resttempcep.v1.service.CepService;
+import com.example.resttempcep.v1.entity.Cep;
+import com.example.resttempcep.v1.entity.Transporte;
+import com.example.resttempcep.v1.service.transporte.TransporteService;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
@@ -15,25 +15,25 @@ import static org.springframework.http.HttpStatus.*;
 @AllArgsConstructor
 @RestController
 @RequestMapping("/api/v1")
-public class Controller {
+public class TransporteController {
 
-    private final CepService service;
+    private final TransporteService service;
 
     @PostMapping //TODO -> Ajustar POST
     @ResponseStatus(CREATED)
-    public CepEntity save(@RequestBody @Valid CepEntity cepEntity) {
-        return service.save(cepEntity);
+    public Transporte save(@RequestBody @Valid Transporte transporte) {
+        return service.save(transporte);
     }
 
     @PutMapping("/{id}")
     @ResponseStatus(ACCEPTED)
-    public CepEntity update(@RequestBody @Valid CepEntity cepEntity, @PathVariable String id) {
-        return service.update(cepEntity, id);
+    public Transporte update(@RequestBody @Valid Transporte transporte, @PathVariable String id) {
+        return service.update(transporte, id);
     }
 
     @GetMapping("/{id}")
     @ResponseStatus(OK)
-    public CepEntity findById(@PathVariable @Valid String id) {
+    public Transporte findById(@PathVariable @Valid String id) {
         return service.findById(id);
     }
 
@@ -45,12 +45,12 @@ public class Controller {
 
     @GetMapping("/findAll")
     @ResponseStatus(OK)
-    public List<CepEntity> findAll() {
+    public List<Transporte> findAll() {
         return service.findAll();
     }
 
     @GetMapping("/cep/{cep}")
-    public ApiExtEntity findCep(@PathVariable @Valid String cep){
+    public Cep findCep(@PathVariable @Valid String cep){
         return service.getCep(cep);
     }
 }

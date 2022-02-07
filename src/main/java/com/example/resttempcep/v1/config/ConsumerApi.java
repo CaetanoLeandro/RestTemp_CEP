@@ -1,6 +1,6 @@
-package com.example.resttempcep.v1.restTemplate;
+package com.example.resttempcep.v1.config;
 
-import com.example.resttempcep.v1.entity.ApiExtEntity;
+import com.example.resttempcep.v1.entity.Cep;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
@@ -11,8 +11,9 @@ public class ConsumerApi {
 
     private RestTemplate restTemplate;
 
-    public ApiExtEntity findCep(String cep) {
+    public Cep findCep(String cep) {
         String uri = "https://viacep.com.br/ws/" + cep + "/json/";
-        return restTemplate.getForObject(uri, ApiExtEntity.class);
+        return restTemplate.getForObject(uri, Cep.class);
     }
+
 }

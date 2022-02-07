@@ -5,13 +5,11 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
 @Data
-public class ApiExtEntity {
-
+public class Cep {
     private String cep;
     private String logradouro;
     private String bairro;

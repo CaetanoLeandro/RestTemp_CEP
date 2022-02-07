@@ -1,31 +1,23 @@
 package com.example.resttempcep.v1.entity;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.*;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
-
 import java.time.LocalDate;
-
+import java.util.Date;
 
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
 @Data
-@Document(collection = "transporte")
-public class CepEntity {
-
+@Document(collection = "transportes")
+public class Transporte {
       @Id
       private String id;
-      private String nomeDestinatario;
-//    @JsonProperty("cep")
-      private String cep;
-      private Double vlTotalFrete;
-      private Double pesoEncomenda;
-      private String dataPrevistaEntrega;
+      private Double valorTotalFrete;
+      private Date dataPrevistaEntrega;
       private LocalDate dataConsulta;
-      private ApiExtEntity cepOrigem;
-      private ApiExtEntity ceDestino;
+
       private String logradouro;
       private String bairro;
       private String complemento;

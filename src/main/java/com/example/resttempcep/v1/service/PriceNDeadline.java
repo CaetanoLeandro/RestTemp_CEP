@@ -1,46 +1,51 @@
 package com.example.resttempcep.v1.service;
 
-import com.example.resttempcep.v1.entity.CepEntity;
+import com.example.resttempcep.v1.entity.Transporte;
 
-public class PriceNDeadline extends CepEntity {//TODO -> Regras de negocios
+import java.time.LocalDate;
+import java.util.Date;
 
-    Double valorPeso = 1.00;
+public class PriceNDeadline extends Transporte { //TODO -> Regras de negocios
 
-    String cepOrigem = String.valueOf(getCepOrigem());
+    private Double valorTotalFrete;
+    private Date dataPrevistaEntrega;
+    private LocalDate dataConsulta;
+
+
+    Double valorPeso = 1.00D;
+    Date dataPrevisaoEntrega;
+
+    String cepOrigem =  String.valueOf(getCepOrigem());
     String cepDestino = String.valueOf(getCeDestino());
 
-     Boolean cepsMesmoUf = Boolean.valueOf(String.valueOf(cepDestino.substring(0, 1).equals(cepOrigem.substring(0, 1))));
+     Boolean cepsMesmoUf = Boolean.valueOf(String.valueOf(cepDestino.substring(0, 1)
+             .equals(cepOrigem.substring(0, 1))));
 
-    if (cepsMesmoUf) {
-        setDataPrevistaEntrega("1");
-        setVlTotalFrete((getPesoEncomenda()*valorPeso)/2);
+     Boolean mesmoDDD = getCepOrigem()
+             .getDdd()
+             .equals(getCeDestino().getDdd());
 
-    }else if(cepsMesmoUf && getCepOrigem().getDdd().equals(getCeDestino().getDdd())) {
-        setDataPrevistaEntrega("3");
-        double SetECinco = 75/100;
-        setVlTotalFrete(getPesoEncomenda()*valorPeso-(SetECinco*valorPeso));
 
-    }else if(!cepsMesmoUf) {
-        setDataPrevistaEntrega("10");
-       setVlTotalFrete(getPesoEncomenda()*valorPeso);
+     public Boolean validaCep(Boolean cepsMesmoUf, Boolean mesmoDDD ) {
+         if (cepsMesmoUf) {
+             dataPrevisaoEntrega = getDataPrevistaEntrega(1);
+             valorTotalFrete((getPesoEncomenda() * 0.50D) * valorPeso);
+
+         } else if (cepsMesmoUf && mesmoDDD) {
+             dataPrevisaoEntrega = getDataPrevistaEntrega(3);
+             valorTotalFrete((getPesoEncomenda() * 0.25D) * valorPeso);
+
+         } else if (!cepsMesmoUf) {
+             dataPrevisaoEntrega = getDataPrevistaEntrega(10);
+             valorTotalFrete(getPesoEncomenda() * valorPeso);
+         }
+     }
+
+    private Date getDataPrevistaEntrega(final Integer dias) {
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(new Date());
+        calendar.add(Calendar.DATE, dias);
+        return calendar.getTime();
     }
 
-//    public void cauloFreteCinquenta() {
-//        setDataPrevistaEntrega("1");
-//        setVlTotalFrete((getPesoEncomenda()*valorPeso)/2);
-//    }
-//
-//    public void cauloFreteStentaECinco() {
-//        setDataPrevistaEntrega("3");
-//        double SetECinco = 75/100;
-//        setVlTotalFrete(getPesoEncomenda()*valorPeso-(SetECinco*valorPeso));
-//    }
-//
-//    public void semDesconto(){
-//        setDataPrevistaEntrega("10");
-//        setVlTotalFrete(getPesoEncomenda()*valorPeso);
-//    }
-
-
 }
-
