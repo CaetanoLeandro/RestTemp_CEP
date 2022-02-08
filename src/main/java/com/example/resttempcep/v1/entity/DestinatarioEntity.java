@@ -12,11 +12,12 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @Builder
 @Data
 @Document(collection = "destinatarios")
-public class Destinatario {
+public class DestinatarioEntity {
     @Id
     private String id;
     private String nomeDestinatario;
     private Double pesoEncomenda;
     private String cepOrigem;
     private String cepDestino;
+
 }

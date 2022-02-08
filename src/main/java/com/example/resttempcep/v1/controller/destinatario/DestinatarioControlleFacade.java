@@ -37,4 +37,8 @@ public class DestinatarioControlleFacade {
                 .toList();
     }
 
+    public void deleteById(String id) {
+        facade.delete(id);
+    }
+
 }

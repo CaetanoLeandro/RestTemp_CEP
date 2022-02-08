@@ -35,11 +35,11 @@ public class DestinatarioController {
         return facade.findById(id);
     }
 
-//    @DeleteMapping("/")
-//    @ResponseStatus(NO_CONTENT)
-//    public void delete(@RequestParam(required = false) List<String> id) {
-//        facade.delete(id);
-//    }
+    @DeleteMapping("/{id}")
+    @ResponseStatus(NO_CONTENT)
+    public void deleteById(@PathVariable @Valid String id) {
+        facade.deleteById(id);
+    }
 
     @GetMapping
     @ResponseStatus(OK)

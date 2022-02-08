@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Builder
 @Data
-public class Cep {
+public class CepIntegration {
     private String cep;
     private String logradouro;
     private String bairro;

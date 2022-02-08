@@ -11,16 +11,11 @@ import java.util.Date;
 @Builder
 @Data
 @Document(collection = "transportes")
-public class Transporte {
+public class TransporteEntity {
       @Id
       private String id;
       private Double valorTotalFrete;
       private Date dataPrevistaEntrega;
       private LocalDate dataConsulta;
-      private String logradouro;
-      private String bairro;
-      private String complemento;
-      private String uf;
-      private String ddd;
-      private String localidade;
+     // private CepIntegration cep;
 }

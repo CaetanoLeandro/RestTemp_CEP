@@ -1,8 +1,9 @@
 package com.example.resttempcep.v1.service.destinatario;
 
-import com.example.resttempcep.v1.entity.Destinatario;
+import com.example.resttempcep.v1.entity.DestinatarioEntity;
 import com.example.resttempcep.v1.exceptions.notfound.NotFoundException;
 import com.example.resttempcep.v1.repository.DestinatarioRepository;
+import com.example.resttempcep.v1.service.PriceNDeadline;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import java.util.List;
@@ -12,33 +13,29 @@ import java.util.List;
 public class DestinatarioService {
 
     private final DestinatarioRepository repository;
+    private final PriceNDeadline priceNDeadline;
 
-    public Destinatario save(Destinatario destinatario) {
-        return repository.save(destinatario);
+    public DestinatarioEntity save(DestinatarioEntity destinatarioEntity) {
+        priceNDeadline.validaCep(destinatarioEntity.getCepOrigem(), destinatarioEntity.getCepDestino());
+        return repository.save(destinatarioEntity);
     }
 
-    public Destinatario update(Destinatario destinatario, String id) {
-        destinatario.setId(id);
-        return repository.save(destinatario);
+    public DestinatarioEntity update(DestinatarioEntity destinatarioEntity, String id) {
+        destinatarioEntity.setId(id);
+        return repository.save(destinatarioEntity);
     }
 
-    public Destinatario findById(String id) {
+    public DestinatarioEntity findById(String id) {
         return repository.findById(id)
                 .orElseThrow(() -> new NotFoundException("ID not found"));
     }
 
-    public List<Destinatario> findAll() {
+    public List<DestinatarioEntity> findAll() {
         return repository.findAll();
     }
 
-//    public void delete(List<String> id) {
-//        if(!CollectionUtils.isEmpty(id)) {
-//            var del = repository.findAll();
-//            repository.delete((Destinatario) del);
-//        }
-//        else{
-//            repository.delete((Destinatario) repository.findAll());
-//        }
-//    }
+    public void deleteById(String id) {
+        repository.deleteById(id);
+    }
 
 }
