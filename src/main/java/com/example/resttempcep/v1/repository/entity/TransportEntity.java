@@ -10,12 +10,8 @@ import java.util.Date;
 @NoArgsConstructor
 @Builder
 @Data
-@Document(collection = "transportes")
-public class TransporteEntity {
-      @Id
-      private String id;
+public class TransportEntity {
       private Double valorTotalFrete;
       private Date dataPrevistaEntrega;
       private LocalDate dataConsulta;
-     // private AddressIntegration cep;
 }
