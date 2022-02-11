@@ -1,4 +1,4 @@
-package com.example.resttempcep.v1.entity;
+package com.example.resttempcep.v1.repository.entity;
 
 import lombok.*;
 import org.springframework.data.annotation.Id;
@@ -17,5 +17,5 @@ public class TransporteEntity {
       private Double valorTotalFrete;
       private Date dataPrevistaEntrega;
       private LocalDate dataConsulta;
-     // private CepIntegration cep;
+     // private AddressIntegration cep;
 }

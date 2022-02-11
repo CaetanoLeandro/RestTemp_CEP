@@ -1,4 +1,5 @@
-package com.example.resttempcep.v1.entity;
+package com.example.resttempcep.v1.repository.entity;
+
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -7,13 +8,12 @@ import lombok.NoArgsConstructor;
 
 @AllArgsConstructor
 @NoArgsConstructor
-@Builder
 @Data
-public class CepIntegration {
+@Builder
+public class AddressEntity {
     private String cep;
     private String logradouro;
     private String bairro;
-    private String complemento;
     private String uf;
     private String ddd;
     private String localidade;

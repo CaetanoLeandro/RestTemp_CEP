@@ -1,4 +1,4 @@
-package com.example.resttempcep.v1.entity;
+package com.example.resttempcep.v1.repository.entity;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -11,13 +11,12 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @NoArgsConstructor
 @Builder
 @Data
-@Document(collection = "destinatarios")
-public class DestinatarioEntity {
+@Document(collection = "encomenda")
+public class OrderEntity {
     @Id
     private String id;
     private String nomeDestinatario;
     private Double pesoEncomenda;
-    private String cepOrigem;
-    private String cepDestino;
-
+    private AddressEntity addressOrigin;
+    private AddressEntity addressDestination;
 }

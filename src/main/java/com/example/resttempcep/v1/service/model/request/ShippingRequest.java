@@ -1,6 +1,5 @@
-package com.example.resttempcep.v1.service.model.response;
+package com.example.resttempcep.v1.service.model.request;
 
-import com.example.resttempcep.v1.entity.CepEntity;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -10,10 +9,10 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Builder
 @Data
-public class DestinatarioServiceResponse {
+public class ShippingRequest {
     private String id;
     private String nomeDestinatario;
     private Double pesoEncomenda;
-    private CepEntity cepOrigem;
-    private CepEntity cepDestino;
+    private String cepOrigem;
+    private String cepDestino;
 }
