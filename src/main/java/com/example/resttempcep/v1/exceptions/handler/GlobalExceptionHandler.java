@@ -12,11 +12,11 @@ import java.time.Instant;
 import static org.springframework.http.HttpStatus.NOT_FOUND;
 
 @RestControllerAdvice
-public class RestExceptionHandler {
+public class GlobalExceptionHandler {
 
     @ExceptionHandler(NotFoundException.class)
     @ResponseStatus(NOT_FOUND)
-    public RestExceptionDetails handlerNotFoundException(NotFoundException e){
+    public RestExceptionDetails handlerNotFoundException(NotFoundException e) {
         return RestExceptionDetails.builder()
                 .status(NOT_FOUND.value())
                 .title("Not found")
@@ -26,4 +26,5 @@ public class RestExceptionHandler {
                 .build();
 
     }
+
 }

@@ -16,4 +16,5 @@ public class ShippingResponse {
     private Double pesoEncomenda;
     private AddressEntity addressOrigin;
     private AddressEntity addressDestination;
+    private TransportResponse transport;
 }

@@ -11,7 +11,7 @@ import java.util.Date;
 @Builder
 @Data
 public class TransportEntity {
-      private Double valorTotalFrete;
-      private Date dataPrevistaEntrega;
-      private LocalDate dataConsulta;
+      private Double totalShippingValue;
+      private Date deliverydate;
+      private LocalDate dataQuery;
 }

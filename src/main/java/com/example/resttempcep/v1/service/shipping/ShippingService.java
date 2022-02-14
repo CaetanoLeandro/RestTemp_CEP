@@ -7,9 +7,12 @@ import com.example.resttempcep.v1.repository.entity.AddressIntegration;
 import com.example.resttempcep.v1.repository.entity.OrderEntity;
 import com.example.resttempcep.v1.service.mapper.response.ShippingServiceResponseMapper;
 import com.example.resttempcep.v1.service.model.request.ShippingRequest;
+import com.example.resttempcep.v1.service.model.request.TransportRequest;
 import com.example.resttempcep.v1.service.model.response.ShippingResponse;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
+
+import java.time.LocalDate;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -20,21 +23,23 @@ import static com.example.resttempcep.v1.service.mapper.response.ShippingService
 @Service
 public class ShippingService {
 
-    private final ShippingRepository repository;
-    private final ConsumerApi consumerApi;
+    private ShippingRepository repository;
+    private ConsumerApi consumerApi;
 
     public ShippingResponse save(ShippingRequest shippingRequest) {
-        AddressIntegration cepOrigin = consumerApi.findAddressIntegration(shippingRequest.getCepOrigem());
-        AddressIntegration cepDestino = consumerApi.findAddressIntegration(shippingRequest.getCepDestino());
-        OrderEntity orderEntity = toResponseEntity(shippingRequest, cepOrigin, cepDestino);
+        AddressIntegration CepOrigem = consumerApi.findAddressIntegration(shippingRequest.getCepOrigem());
+        AddressIntegration CepDestino = consumerApi.findAddressIntegration(shippingRequest.getCepDestino());
+        TransportRequest calculationTransport = toCalculationShipping(CepOrigem, CepDestino, shippingRequest);
+        OrderEntity orderEntity = toResponseEntity(shippingRequest, CepOrigem, CepDestino, calculationTransport);
         OrderEntity save = repository.save(orderEntity);
         return toShippingResponse(save);
     }
 
     public ShippingResponse update(ShippingRequest shippingRequest, String id) {
-        AddressIntegration cepOrigin = consumerApi.findAddressIntegration(shippingRequest.getCepOrigem());
-        AddressIntegration cepDestino = consumerApi.findAddressIntegration(shippingRequest.getCepDestino());
-        OrderEntity orderEntity = toResponseEntity(shippingRequest, cepOrigin, cepDestino);
+        AddressIntegration zipOrigin = consumerApi.findAddressIntegration(shippingRequest.getCepOrigem());
+        AddressIntegration zipDestination = consumerApi.findAddressIntegration(shippingRequest.getCepDestino());
+        TransportRequest calculationTransport = toCalculationShipping(zipOrigin, zipDestination, shippingRequest);
+        OrderEntity orderEntity = toResponseEntity(shippingRequest, zipOrigin, zipDestination, calculationTransport);
         repository.findById(id)
                 .orElseThrow(() -> new NotFoundException("ID not found"));
         OrderEntity save = repository.save(orderEntity);
@@ -58,11 +63,13 @@ public class ShippingService {
     }
 
 
-    public void calculateShipping(AddressIntegration addressOrigin, AddressIntegration addressDestination) {
+    private TransportRequest toCalculationShipping(AddressIntegration addressOrigin,
+                                                   AddressIntegration addressDestination, ShippingRequest shippingRequest) {
 
         final Double weightValue = 1.00D;
         Double totalShippingValue;
-        Date date;
+        Date deliverydate;
+        Double weight = shippingRequest.getPesoEncomenda();
 
         // getUf() is AddressIntegration
         boolean isSameUf = Boolean.parseBoolean(String.valueOf(addressOrigin.getCep().substring(0, 1)
@@ -72,16 +79,21 @@ public class ShippingService {
         boolean isSameDdd = addressOrigin.getDdd().equals(addressDestination.getDdd());
 
         if (isSameUf) {
-            date = shippingForecast(1); // * Prazo de entrega (dias)
-            totalShippingValue = 0.50D * weightValue; // 50% desconto
+            deliverydate = shippingForecast(1); // * Prazo de entrega (dias)
+            totalShippingValue = (weight * 0.50D) * weightValue; // 50% desconto
         } else if (isSameUf && isSameDdd) {
-            date = shippingForecast(3); // *
-            totalShippingValue = 0.25D * weightValue; // 75% desconto
+            deliverydate = shippingForecast(3); // *
+            totalShippingValue = (weight * 0.25D) * weightValue; // 75% desconto
         } else {
-            date = shippingForecast(10);// *
+            deliverydate = shippingForecast(10);// *
             totalShippingValue = weightValue;
         }
 
+        return TransportRequest.builder()
+                .totalShippingValue(totalShippingValue)
+                .deliverydate(deliverydate)
+                .dataQuery(LocalDate.now())
+                .build();
     }
 
     private Date shippingForecast(final Integer days) {
@@ -90,5 +102,4 @@ public class ShippingService {
         calendar.add(Calendar.DATE, days);
         return calendar.getTime();
     }
-
 }

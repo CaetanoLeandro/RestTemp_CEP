@@ -19,4 +19,5 @@ public class OrderEntity {
     private Double pesoEncomenda;
     private AddressEntity addressOrigin;
     private AddressEntity addressDestination;
+    private TransportEntity transport;
 }

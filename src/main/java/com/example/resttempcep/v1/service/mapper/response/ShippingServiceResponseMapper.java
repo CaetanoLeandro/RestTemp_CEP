@@ -11,13 +11,16 @@ import java.util.Optional;
 
 public class ShippingServiceResponseMapper {
 
-    public static ShippingResponse toShippingResponse(OrderEntity orderEntity, TransportEntity transportEntity) {
-        return ShippingResponse.builder()
-                .id(orderEntity.getId())
-                .nomeDestinatario(orderEntity.getNomeDestinatario())
-                .addressDestination(orderEntity.getAddressDestination())
-                .addressOrigin(orderEntity.getAddressOrigin())
-                .build();
+    public static ShippingResponse toShippingResponse(OrderEntity orderEntity) {
+        return Optional.ofNullable(orderEntity)
+                .map((OrderEntity order) -> ShippingResponse.builder()
+                        .id(orderEntity.getId())
+                        .nomeDestinatario(orderEntity.getNomeDestinatario())
+                        .pesoEncomenda(order.getPesoEncomenda())
+                        .addressDestination(orderEntity.getAddressDestination())
+                        .addressOrigin(orderEntity.getAddressOrigin())
+                        .transport(toTransportResponse(orderEntity.getTransport()))
+                        .build()).orElse(null);
 
     }
 
@@ -31,13 +34,13 @@ public class ShippingServiceResponseMapper {
                         .uf(addressEntity.getUf())
                         .build()).orElse(null);
     }
-    
-    public static TransportResponse toTransportResponse(TransportEntity transportEntity){
+
+    public static TransportResponse toTransportResponse(TransportEntity transportEntity) {
         return Optional.ofNullable(transportEntity)
                 .map((TransportEntity transport) -> TransportResponse.builder()
-                        .dataPrevistaEntrega(transportEntity.getDataPrevistaEntrega())
-                        .valorTotalFrete(transportEntity.getValorTotalFrete())
-                        .dataConsulta(transportEntity.getDataConsulta())
+                        .deliverydate(transportEntity.getDeliverydate())
+                        .totalShippingValue(transportEntity.getTotalShippingValue())
+                        .dataQuery(transportEntity.getDataQuery())
                         .build()).orElse(null);
     }
 }
