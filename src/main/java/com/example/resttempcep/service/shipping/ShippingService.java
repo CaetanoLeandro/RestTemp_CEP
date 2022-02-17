@@ -35,17 +35,10 @@ public class ShippingService {
     }
 
     public ShippingResponse update(ShippingRequest shippingRequest, String id) {
-<<<<<<< HEAD:src/main/java/com/example/resttempcep/v1/service/shipping/ShippingService.java
-        AddressIntegration zipOrigin = consumerApi.findAddressIntegration(shippingRequest.getCepOrigem());
-        AddressIntegration zipDestination = consumerApi.findAddressIntegration(shippingRequest.getCepDestino());
-        TransportRequest calculationTransport = toCalculationShipping(zipOrigin, zipDestination, shippingRequest);
-        OrderEntity orderEntity = toResponseEntity(shippingRequest, zipOrigin, zipDestination, calculationTransport);
-=======
         AddressIntegration CepOrigem = consumerApi.findAddressIntegration(shippingRequest.getCepOrigem());
         AddressIntegration CepDestino = consumerApi.findAddressIntegration(shippingRequest.getCepDestino());
         TransportRequest calculationTransport = toCalculationShipping(CepOrigem, CepDestino, shippingRequest);
         OrderEntity orderEntity = ShippingServiceRequestMapper.toResponseEntity(shippingRequest, CepOrigem, CepDestino, calculationTransport);
->>>>>>> 865f659... Creating Integration Tests:src/main/java/com/example/resttempcep/service/shipping/ShippingService.java
         repository.findById(id)
                 .orElseThrow(() -> new NotFoundException("ID not found"));
         OrderEntity save = repository.save(orderEntity);

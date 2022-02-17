@@ -1,9 +1,9 @@
-package com.example.resttempcep;
+package com.example.resttempcep.testsApi.unitaryTests;
 
 import com.example.resttempcep.service.model.request.ShippingRequest;
 import com.example.resttempcep.service.shipping.ShippingService;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
@@ -21,7 +21,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @EnableWebMvc
 @SpringBootTest
 @ExtendWith(SpringExtension.class)
-class ShippingControllerTest {
+class ShippingUnitaryTest {
 
     @Autowired
     MockMvc mockMvc;
@@ -73,27 +73,29 @@ class ShippingControllerTest {
                         .content(objectMapper.writeValueAsString(shippingRequest)))
                 .andExpect(status().isBadRequest());
     }
+    @Test
     void deleteByIdNoContent() throws Exception { // 204
-        mockMvc.perform(delete("/api/v1/destinatario/20"))
+        mockMvc.perform(delete("/api/v1/destinatario/id"))
                 .andExpect(status().isNoContent());
     }
+    @Test
     void deleteByIdBadRequest() throws Exception { // 400
-        mockMvc.perform(delete("/api/v1/destinatario/1"))
+        mockMvc.perform(delete("/api/v1/destinatario/i2d"))
                 .andExpect(status().isBadRequest());
     }
-
+    @Test
     void findAllIsOk() throws Exception { //200
-        mockMvc.perform(get("/api/v1/destinatario/0"))
+        mockMvc.perform(get("/api/v1/destinatario/id"))
                 .andExpect(status().isOk());
     }
-
+    @Test
     void findByIdIsOk() throws Exception { //200
-        mockMvc.perform(get("/api/v1/destinatario/5"))
+        mockMvc.perform(get("/api/v1/destinatario/id"))
                 .andExpect(status().isOk());
     }
-
+    @Test
     void findByIdBadRequest() throws Exception { //200
-        mockMvc.perform(get("/api/v1/destinatario/5"))
+        mockMvc.perform(get("/api/v1/destinatario/i2d"))
                 .andExpect(status().isBadRequest());
     }
 }

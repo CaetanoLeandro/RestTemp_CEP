@@ -1,15 +1,10 @@
 package com.example.resttempcep.controller.v1;
 
-<<<<<<< HEAD:src/main/java/com/example/resttempcep/v1/controller/v1/ShippingController.java
-import com.example.resttempcep.v1.service.model.request.ShippingRequest;
-import com.example.resttempcep.v1.service.model.response.ShippingResponse;
-import com.example.resttempcep.v1.service.shipping.ShippingService;
-=======
+
 import com.example.resttempcep.annotations.SizeCep;
 import com.example.resttempcep.service.model.request.ShippingRequest;
 import com.example.resttempcep.service.model.response.ShippingResponse;
 import com.example.resttempcep.service.shipping.ShippingService;
->>>>>>> 865f659... Creating Integration Tests:src/main/java/com/example/resttempcep/controller/v1/ShippingController.java
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
@@ -26,12 +21,14 @@ public class ShippingController {
 
     @PostMapping
     @ResponseStatus(CREATED)
+    @SizeCep
     public ShippingResponse save(@RequestBody @Valid ShippingRequest shippingRequest) {
         return service.save(shippingRequest);
     }
 
     @PutMapping("/{id}")
     @ResponseStatus(ACCEPTED)
+    @SizeCep
     public ShippingResponse update(@RequestBody @Valid ShippingRequest shippingRequest, @PathVariable String id) {
         return service.update(shippingRequest, id);
     }
