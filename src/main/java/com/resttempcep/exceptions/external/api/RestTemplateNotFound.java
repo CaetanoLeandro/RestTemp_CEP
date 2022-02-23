@@ -1,4 +1,4 @@
-package com.resttempcep.exceptions.externalApi;
+package com.resttempcep.exceptions.external.api;
 
 
 

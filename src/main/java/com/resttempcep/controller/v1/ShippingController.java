@@ -1,7 +1,5 @@
 package com.resttempcep.controller.v1;
 
-
-import com.resttempcep.annotations.SizeCep;
 import com.resttempcep.service.model.request.ShippingRequest;
 import com.resttempcep.service.model.response.ShippingResponse;
 import com.resttempcep.service.shipping.ShippingService;
